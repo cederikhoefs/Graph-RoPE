@@ -24,68 +24,9 @@ in addition to ours when using this code.
 Our contribution lives primarily in the `graphgps/layer/graphrope.py` module and the associated
 configs under `configs/`.
 
-## Python environment setup with Conda
-
-```bash
-conda create -n graphgps python=3.10
-conda activate graphgps
-
-conda install pytorch=1.13 torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-conda install pyg=2.2 -c pyg -c conda-forge
-pip install pyg-lib -f https://data.pyg.org/whl/torch-1.13.0+cu117.html
-
-# RDKit is required for OGB-LSC PCQM4Mv2 and datasets derived from it.
-conda install openbabel fsspec rdkit -c conda-forge
-
-pip install pytorch-lightning yacs torchmetrics
-pip install performer-pytorch
-pip install tensorboardX
-pip install ogb
-pip install wandb
-
-conda clean --all
-```
-
-## Running Graph-RoPE
-
-```bash
-conda activate graphgps
-
-# Example: Graph-RoPE on ZINC
-python main.py --cfg configs/GPS/zinc-GPS+RWSE.yaml  wandb.use False
-
-# Run a debug/dev config for ZINC.
-python main.py --cfg tests/configs/graph/zinc.yaml  wandb.use False
-```
-
-Configs for the benchmarks reported in the paper are provided under `configs/`. As in GraphGPS,
-multiple seeds can be run via the `--repeat` flag:
-
-```bash
-# Run 10 repeats with 10 different random seeds (0..9):
-python main.py --cfg configs/GPS/zinc-GPS+RWSE.yaml  --repeat 10  wandb.use False
-# Run a particular random seed:
-python main.py --cfg configs/GPS/zinc-GPS+RWSE.yaml  --repeat 1  seed 42  wandb.use False
-```
-
-### W&B logging
-
-To use W&B logging, set `wandb.use True` and have a `gtransformers` entity set up in your W&B
-account (or change it by setting `wandb.entity`).
-
-## Unit tests
-
-To run all unit tests, execute from the project root directory:
-
-```bash
-python -m unittest -v
-```
-
-Or specify a particular test module, e.g.:
-
-```bash
-python -m unittest -v unittests.test_eigvecs
-```
+Configs for the benchmarks reported in the paper are provided under `configs/`. For environment
+setup and general usage instructions, please refer to the upstream
+[GraphGPS](https://github.com/rampasek/GraphGPS) repository.
 
 ## Citation
 
